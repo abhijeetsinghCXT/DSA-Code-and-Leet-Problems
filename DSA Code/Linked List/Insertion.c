@@ -28,6 +28,51 @@ ptr->data = data;
 head = ptr;
 };
 
+//Insertion between a Linked List
+struct Node* InsertinBetween(struct Node* head, int index, int data){
+    struct Node* ptr = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* counter = head;
+    int i = 1;
+    while (i!=index)
+    {
+        counter = counter->link;
+        i++;
+    }
+    ptr->data = data;
+    ptr->link = counter->link;
+    counter->link = ptr;
+    
+    return head;
+};
+
+//Insertion at the End of Linked List
+struct Node* InsertatEnd(struct Node* head, int data){
+    struct Node* ptr = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* counter = head;
+    while (counter->link!=NULL)
+    {
+        counter = counter->link;
+    }
+    ptr->data = data;
+    counter->link = ptr;
+    ptr->link = NULL;
+    
+    return head;
+};
+
+//Insertion after a given Node in a Linked List
+struct Node* InsertAfterNode(struct Node* head, struct Node* node,  int data){
+    struct Node* ptr = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* counter = head;
+
+    ptr->data = data;
+    ptr->link = node->link;
+    node->link = ptr;
+    
+    return head;
+};
+
+
 int main()
 {
 
@@ -48,7 +93,11 @@ int main()
     node3->link = NULL;
 
     
-    head = InsertAtStart(head, 7);
+    // head = InsertAtStart(head, 7);
+    // head = InsertinBetween(head, 1, 31);
+    // head = InsertatEnd(head, 65);
+    head = InsertAfterNode(head, node2, 77);
+
     printLL(head);
 
     return 0;
