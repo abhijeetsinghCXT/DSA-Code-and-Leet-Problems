@@ -19,15 +19,16 @@ void printLL(struct Node *ptr)
     }
 };
 
+//Deletion at Start
+struct Node* DeleteatStart(struct Node* head){
+    struct Node* ptr = head;
+    head = head ->link;
+    free(ptr);
 
-// struct Node* DeleteatStart(struct Node* head){
-//     struct Node* ptr = head;
-//     head = head ->link;
-//     free(ptr);
+    return head;
+};
 
-//     return head;
-// };
-
+//Deletion in between Nodes
 struct Node* DeleteinBetween(struct Node* head, int index ){
     struct Node* ptr = head;
     struct Node* counter1 = head;
@@ -45,6 +46,45 @@ struct Node* DeleteinBetween(struct Node* head, int index ){
 
     return head;
 };
+
+//Deletion at Last 
+struct Node* DeleteatLast(struct Node* head){
+    struct Node* ptr = head;
+    struct Node* counter = head->link;
+
+    while (counter->link != NULL)
+    {
+        ptr = ptr->link;
+        counter = counter->link;
+        
+    }
+
+    ptr->link = NULL;
+    free(counter);
+
+    return head;
+};
+
+//Deletion at a particular value
+struct Node* DeleteAvalue(struct Node* head, int value){
+    struct Node* ptr = head;
+    struct Node* counter = head->link;
+
+    while (counter->data !=value && counter->link != NULL)
+    {
+        ptr = ptr->link;
+        counter = counter->link;
+    }
+    
+    if (counter->data == value)
+    {
+        ptr->link = counter->link;
+        free(counter);
+    }
+
+    return head;
+};
+
 
 int main()
 {
@@ -78,7 +118,9 @@ int main()
     node6->link = NULL;
 
     // head = DeleteatStart(head);
-    head = DeleteinBetween(head, 2);
+    // head = DeleteinBetween(head, 2);
+    // head = DeleteatLast(head);
+    head = DeleteAvalue(head, 10);
     printLL(head);
 
     return 0;
