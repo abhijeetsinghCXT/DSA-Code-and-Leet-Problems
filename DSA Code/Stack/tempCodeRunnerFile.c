@@ -1,0 +1,1 @@
+top = pop(top);
